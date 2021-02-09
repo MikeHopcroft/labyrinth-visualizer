@@ -1,13 +1,11 @@
-import * as yaml from 'js-yaml';
-
 import {
+  AnyRuleSpec,
   createSimplifier,
-  ForwardRuleSpecEx,
   Graph,
   GraphBuilder,
-  loadYamlNodeSpecs,
+  GraphSpec,
+  loadYamlGraphSpec,
   loadYamlUniverseSpec,
-  NodeSpec,
   Simplifier,
   Universe,
   UniverseSpec
@@ -16,14 +14,14 @@ import {
 export interface World {
   graph: Graph,
   universe: Universe,
-  simplifier: Simplifier<ForwardRuleSpecEx>,
+  simplifier: Simplifier<AnyRuleSpec>,
 }
 
 export function createWorldFromYaml(
   universeYamlText: string,
   configYamlText: string
 ): World {
-  const graphSpec = loadYamlNodeSpecs(configYamlText);
+  const graphSpec = loadYamlGraphSpec(configYamlText);
   const universeSpec = loadYamlUniverseSpec(universeYamlText);
   return createWorld(universeSpec, graphSpec);
 
@@ -31,11 +29,11 @@ export function createWorldFromYaml(
 
 export function createWorld(
   universeSpec: UniverseSpec,
-  nodes: NodeSpec[]
+  graphSpec: GraphSpec
 ): World {
   const universe = new Universe(universeSpec);
-  const simplifier = createSimplifier<ForwardRuleSpecEx>(universe);
-  const builder = new GraphBuilder(universe, simplifier, nodes);
+  const simplifier = createSimplifier<AnyRuleSpec>(universe);
+  const builder = new GraphBuilder(universe, simplifier, graphSpec);
   const graph = builder.buildGraph();
 
   return { graph, universe, simplifier };

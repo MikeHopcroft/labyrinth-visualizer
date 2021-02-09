@@ -1,6 +1,9 @@
 # TODO List
 
 * Top
+  * Download and process Azure resource graphs.
+    * Authentication?
+  * Make static site available on github pages.
   * AnalyzerPathProps
     * http://localhost:3000/analyze/foo/gateway/router should not throw
       * Need some sort of notion of a valid path

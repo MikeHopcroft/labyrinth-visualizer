@@ -54,6 +54,7 @@ export class AnalyzerPathProps {
     this.endKey = end;
   }
 
+  // https://stackoverflow.com/questions/61444428/typescript-create-an-instance-using-the-constructor-property
   clone(): AnalyzerPathProps {
     const constructor = this.constructor as {
       new(
@@ -69,6 +70,7 @@ export class AnalyzerPathProps {
   }
 
   to(): AnalyzerPathProps {
+    // TODO: do we really want to run all of the constructor logic here?
     const a = this.clone();
     a.isOutbound = false;
     return a;
