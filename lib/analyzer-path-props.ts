@@ -1,4 +1,3 @@
-import { dir } from 'console';
 import {NodeSpec} from 'labyrinth-nsg';
 
 export enum Direction {
@@ -14,7 +13,9 @@ export class AnalyzerPathProps {
 
   static create(pathname: string, nodes?: NodeSpec[]): AnalyzerPathProps {
     const [ignore, mode, direction, start, end] = pathname.split('/');
-    return new AnalyzerPathProps(direction, start, end, nodes);
+    const e = end ? end.replace(/%2f/g, '/'): end;
+    const s = start ? start.replace(/%2f/g, '/'): start;
+    return new AnalyzerPathProps(direction, s, e, nodes);
   }
 
   constructor(
@@ -75,36 +76,32 @@ export class AnalyzerPathProps {
     a.isOutbound = false;
     return a;
   }
-  // to() {
-  //   return [
-  //     '/analyze',
-  //     'to',
-  //     this.startKey,
-  //   ].join('/');
-  // }
 
+  // TODO: this function should return an AnalyzerPathProps like the to() method.
   from() {
     return [
       '/analyze',
       'from',
-      this.startKey,
+      this.startKey.replace(/\//g, '%2f'),
     ].join('/');
   }
 
+  // TODO: this function should return an AnalyzerPathProps like the to() method.
   start(name: string) {
     return [
       '/analyze',
       this.isOutbound ? 'from' : 'to',
-      name,
+      name.replace(/\//g, '%2f'),
     ].join('/');
   }
 
+  // TODO: this function should return an AnalyzerPathProps like the to() method.
   end(name: string) {
     return [
       '/analyze',
       this.isOutbound ? 'from' : 'to',
-      this.startKey,
-      name
+      this.startKey.replace(/\//g, '%2f'),
+      name.replace(/\//g, '%2f'),
     ].join('/');
   }
 
@@ -112,8 +109,8 @@ export class AnalyzerPathProps {
     return [
       '/analyze',
       this.isOutbound ? 'from' : 'to',
-      this.startKey,
-      this.endKey
+      this.startKey.replace(/\//g, '%2f'),
+      this.endKey ? this.endKey.replace(/\//g, '%2f') : this.endKey
     ].join('/');
   }
 }
