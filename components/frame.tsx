@@ -77,7 +77,7 @@ const FrameBodyRouted = withRouter(FrameBody);
 function FrameBodyAndInfo() {
   return (
     <div style={{ flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
-      <SplitPane split="vertical" minSize={100} defaultSize={600} primary="second">
+      <SplitPane split="vertical" minSize={100} defaultSize={600} primary="first">
         <FrameBodyRouted/>
         <Info/>
       </SplitPane>

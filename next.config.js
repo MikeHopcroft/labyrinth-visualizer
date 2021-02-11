@@ -19,10 +19,10 @@ module.exports = {
         use: 'raw-loader',
         // use: 'js-yaml-loader',
       },
-      // {
-      //   test: /\.md$/,
-      //   use: 'raw-loader',
-      // }
+      {
+        test: /\.md$/,
+        use: 'raw-loader',
+      }
     );
 
     // https://github.com/3rd-Eden/useragent/pull/117

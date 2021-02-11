@@ -1,9 +1,12 @@
 # TODO List
 
 * Top
-  * Editor help pane
+  * Info pane
     * x Splitter
+    * Fix scroll bars
+    * Fix primary vs secondary pane issue
     * Markdown rendering
+      * Render anchors as link
     * Links to load various demos
     * Consider having one buffer per example
       * Can use react router to show example
