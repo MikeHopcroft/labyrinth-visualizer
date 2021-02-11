@@ -1,14 +1,17 @@
 import Head from 'next/head'
 import React from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
 
+import SplitPane from 'react-split-pane'
+
 import Analyze from './analyze-mode';
-// import Editor from './editor'; // DEPRECATED
-import Editor from './editor2';
+import Editor from './editor';
+import Info from './info';
 import NavBar from './nav-bar';
 import NotFound from './page-not-found';
 import Welcome from './welcome-mode';
@@ -31,7 +34,7 @@ class FrameBody extends React.Component<RouteComponentProps<any>> {
     }
 
     return (
-      <div style={{ flexGrow: 1, overflow: 'hidden' }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <Switch>
           <Route
             path={[
@@ -71,6 +74,17 @@ class FrameBody extends React.Component<RouteComponentProps<any>> {
 
 const FrameBodyRouted = withRouter(FrameBody);
 
+function FrameBodyAndInfo() {
+  return (
+    <div style={{ flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
+      <SplitPane split="vertical" minSize={100} defaultSize={600} primary="second">
+        <FrameBodyRouted/>
+        <Info/>
+      </SplitPane>
+    </div>
+  );
+}
+
 export default function Frame() {
   return (
     <Router>
@@ -82,10 +96,10 @@ export default function Frame() {
         width: '100%',
         height: '100%',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}>
         <NavBar />
-        <FrameBodyRouted/>
+        <FrameBodyAndInfo />
       </div>
     </Router>
   );

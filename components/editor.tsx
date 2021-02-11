@@ -111,7 +111,8 @@ class Editor extends React.Component<Props, State> {
           </div>
           <div>
             <Button
-              className="btn btn-success btn-sm"
+              variant="success"
+              size="sm"
               disabled={this.state.analysisIsCurrent}
               onClick={this.onAnalyze}
               title="Analyze"

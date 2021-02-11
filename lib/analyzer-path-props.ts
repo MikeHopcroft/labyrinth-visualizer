@@ -13,6 +13,11 @@ export class AnalyzerPathProps {
 
   static create(pathname: string, nodes?: NodeSpec[]): AnalyzerPathProps {
     const [ignore, mode, direction, start, end] = pathname.split('/');
+    // TODO: come up with better URL encoding scheme.
+    // This means both the architecture and the implementation.
+    // For implementation, look at URLEncoder and other similar methods.
+    // It is not clear that URLEncoder escapes forward slashes.
+    // See https://stackoverflow.com/questions/2992231/slashes-in-url-variables#:~:text=You%20need%20to%20escape%20the%20slashes%20as%20%2F%20.&text=You%20could%20easily%20replace%20the,etc.%2C%20is%20common%20practice.&text=You%20need%20to%20escape%20those,replace%20it%20by%20%2F%20manually.
     const e = end ? end.replace(/%2f/g, '/'): end;
     const s = start ? start.replace(/%2f/g, '/'): start;
     return new AnalyzerPathProps(direction, s, e, nodes);

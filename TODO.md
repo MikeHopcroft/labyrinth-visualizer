@@ -1,6 +1,13 @@
 # TODO List
 
 * Top
+  * Editor help pane
+    * x Splitter
+    * Markdown rendering
+    * Links to load various demos
+    * Consider having one buffer per example
+      * Can use react router to show example
+      * Perhaps use a dropdown in the header to select the example buffer
   * Download and process Azure resource graphs.
     * Authentication?
   * Make static site available on github pages.
@@ -53,7 +60,7 @@
     * http://localhost:3000/analyze/from/internet?destinationIp=except 10.0.0.0/8
   * Bug: editor analyze button enabled on startup - should be disabled
   * Reduce console spew
-  * Rename editor2.tsx
+  * x Rename editor2.tsx
   * Rename config/edit to network
   * Rename config.yaml and /config to network.yaml and /network
   * Errors
